@@ -1,0 +1,88 @@
+body {
+    background: #f8f9fa;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    height: 100vh;
+}
+.login-container {
+    max-width: 450px;
+    margin: 0 auto;
+    padding-top: 7%;
+}
+.login-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.login-card-header {
+    background: #ffffff;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #f2f2f2;
+}
+.login-card-body {
+    padding: 30px;
+}
+.form-control {
+    height: 50px;
+    border-radius: 8px;
+}
+.form-check-input:checked {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+.btn-login {
+    height: 50px;
+    background-color: #4e73df;
+    border-color: #4e73df;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+.btn-login:hover {
+    background-color: #3a5bbc;
+    border-color: #3a5bbc;
+}
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+}
+.login-footer a {
+    color: #4e73df;
+    text-decoration: none;
+}
+.login-footer a:hover {
+    text-decoration: underline;
+}
+.brand-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px;
+    background-color: #4e73df;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.brand-logo i {
+    font-size: 40px;
+    color: white;
+}
+.error-feedback {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+}
+.form-control.with-icon {
+    border-left: none;
+}

@@ -1,0 +1,188 @@
+/* CSS cho trang chi tiết truyện */
+.detail-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.detail-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.badge {
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+.action-btn {
+    margin-right: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #4361ee;
+    border-color: #4361ee;
+}
+
+.btn-success {
+    background-color: #38b000;
+    border-color: #38b000;
+}
+
+.btn-danger {
+    background-color: #e63946;
+    border-color: #e63946;
+}
+
+.btn-warning {
+    background-color: #ff9e00;
+    border-color: #ff9e00;
+    color: #fff;
+}
+
+.btn-outline-danger {
+    color: #e63946;
+    border-color: #e63946;
+}
+
+.btn-outline-danger:hover {
+    background-color: #e63946;
+    color: #fff;
+}
+
+.favorite-active {
+    background-color: #e63946;
+    color: white;
+}
+
+.chapter-list {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.chapter-list h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.chapter-item {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.chapter-item:hover {
+    background-color: #e9ecef;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.chapter-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: block;
+}
+
+.related-stories {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.related-stories h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-item {
+    margin-bottom: 8px;
+}
+
+.read-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+}
+
+.stat-item i {
+    margin-right: 5px;
+    color: #6c757d;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .chapter-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body.dark-theme .detail-card,
+    body.dark-theme .chapter-list,
+    body.dark-theme .related-stories {
+        background-color: #2d2d2d;
+        color: #f1f1f1;
+    }
+    
+    body.dark-theme .detail-title {
+        color: #f1f1f1;
+    }
+    
+    body.dark-theme .chapter-item {
+        background-color: #3d3d3d;
+    }
+    
+    body.dark-theme .chapter-item a {
+        color: #f1f1f1;
+    }
+    
+    body.dark-theme .chapter-item:hover {
+        background-color: #4d4d4d;
+    }
+}
