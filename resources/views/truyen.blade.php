@@ -10,16 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/truyen.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
 </head>
 <body>
-    <!-- Thêm đoạn code debug này vào đầu file để xem thông tin chi tiết object truyen -->
-    @if(config('app.env') === 'local')
-        <div class="alert alert-info d-none">
-            <pre>{{ print_r($truyen->getAttributes(), true) }}</pre>
-        </div>
-    @endif
-    <!-- Header -->
     @include('layouts.header')
+
+    <!-- @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif -->
 
     <!-- Main Content -->
     <main class="main-content py-5">
@@ -30,7 +32,7 @@
                     <div class="detail-card">
                         <div class="row">
                             <div class="col-md-4 mb-3 mb-md-0">
-                                <img src="{{ asset($truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid rounded shadow">
+                                <img src="{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid rounded shadow">
                                 
                                 <div class="d-block d-md-none mt-3">
                                     <div class="read-stats">
@@ -96,11 +98,30 @@
                                         </a>
                                     @endif
                                     
-                                    <div id="continueReadingButton"></div>
-                                    
-                                    <button id="favoriteButton" class="btn btn-outline-danger action-btn">
-                                        <i class="far fa-heart me-1"></i> Yêu thích
-                                    </button>
+                                    @auth
+                                        @php
+                                            $dangTheoDoi = \App\Models\TheoDoi::where('user_id', Auth::id())
+                                                ->where('truyen_id', $truyen->id)
+                                                ->exists();
+                                        @endphp
+
+                                        <form action="{{ route('theo-doi.toggle', $truyen->id) }}" method="POST">
+                                            @csrf
+                                            @if($dangTheoDoi)
+                                                <button type="submit" class="btn btn-info action-btn">
+                                                    <i class="fas fa-bell me-1"></i> Đang theo dõi
+                                                </button>
+                                            @else
+                                                <button type="submit" class="btn btn-outline-info action-btn">
+                                                    <i class="far fa-bell me-1"></i> Theo dõi
+                                                </button>
+                                            @endif
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="btn btn-outline-info action-btn">
+                                            <i class="far fa-bell me-1"></i> Đăng nhập để theo dõi
+                                        </a>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
@@ -141,7 +162,7 @@
                             @foreach($relatedStories as $related)
                                 <li class="mb-3">
                                     <a href="{{ route('truyen.show', $related->id) }}" class="d-flex align-items-center">
-                                        <img src="{{ asset($related->anh_bia) }}" alt="{{ $related->ten_truyen }}" class="img-fluid rounded me-3" style="width: 60px; height: 80px; object-fit: cover;">
+                                        <img src="{{ asset('assets/img/cover_img/' . $related->anh_bia) }}" alt="{{ $related->ten_truyen }}" class="img-fluid rounded me-3" style="width: 60px; height: 80px; object-fit: cover;">
                                         <div>
                                             <h6 class="mb-1">{{ $related->ten_truyen }}</h6>
                                             <small class="text-muted">
@@ -163,92 +184,9 @@
         </div>
     </main>
 
-    <!-- Footer -->
     @include('layouts.footer')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        $(document).ready(function() {
-
-            $('#favoriteButton').click(function() {
-                $(this).toggleClass('favorite-active');
-                
-                if ($(this).hasClass('favorite-active')) {
-                    $(this).html('<i class="fas fa-heart me-1"></i> Đã thích');
-                    
-                    // Gửi Ajax request để lưu truyện vào danh sách yêu thích (trong thực tế)
-                    // $.post('/favorite/add', {truyen_id: {{ $truyen->id }}});
-                    
-                    // Thông báo đã thêm vào yêu thích
-                    alert('Đã thêm truyện vào danh sách yêu thích!');
-                } else {
-                    $(this).html('<i class="far fa-heart me-1"></i> Yêu thích');
-                    
-                    // Gửi Ajax request để xóa truyện khỏi danh sách yêu thích (trong thực tế)
-                    // $.post('/favorite/remove', {truyen_id: {{ $truyen->id }}});
-                }
-            });
-            
-            // Kiểm tra xem người dùng đã đọc truyện này chưa
-            function checkReadingHistory() {
-                // Lấy lịch sử đọc từ localStorage
-                let readingHistory = localStorage.getItem('readingHistory');
-                
-                if (readingHistory) {
-                    readingHistory = JSON.parse(readingHistory);
-                    
-                    // Tìm truyện hiện tại trong lịch sử
-                    const currentTruyenHistory = readingHistory.find(item => item.truyenId == {{ $truyen->id }});
-                    
-                    if (currentTruyenHistory) {
-                        // Nếu có lịch sử, thêm nút "Đọc tiếp"
-                        $('#continueReadingButton').html(`
-                            <a href="{{ url('/truyen/' . $truyen->id) }}/chapter/${currentTruyenHistory.chapterId}" 
-                               class="btn btn-warning action-btn">
-                                <i class="fas fa-bookmark me-1"></i> Đọc tiếp
-                            </a>
-                        `);
-                    }
-                }
-            }
-            
-            // Chạy kiểm tra khi trang được tải
-            checkReadingHistory();
-        });
-        
-        function saveReadingHistory(truyenId, chapterId, chapterTitle) {
-            // Tạo đối tượng lịch sử đọc
-            const historyItem = {
-                truyenId: truyenId,
-                chapterId: chapterId,
-                chapterTitle: chapterTitle,
-                timestamp: new Date().getTime()
-            };
-            
-            // Lấy lịch sử hiện tại
-            let readingHistory = JSON.parse(localStorage.getItem('readingHistory')) || [];
-            
-            // Kiểm tra xem truyện đã có trong lịch sử chưa
-            const existingIndex = readingHistory.findIndex(item => item.truyenId === truyenId);
-            
-            if (existingIndex !== -1) {
-                // Nếu có, cập nhật
-                readingHistory[existingIndex] = historyItem;
-            } else {
-                // Nếu chưa, thêm mới
-                readingHistory.push(historyItem);
-            }
-            
-            // Giới hạn lịch sử đọc tối đa 20 truyện
-            if (readingHistory.length > 20) {
-                readingHistory = readingHistory.slice(-20);
-            }
-            
-            // Lưu lại vào localStorage
-            localStorage.setItem('readingHistory', JSON.stringify(readingHistory));
-        }
-    </script>
 </body>
 </html>

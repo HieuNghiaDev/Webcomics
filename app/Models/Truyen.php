@@ -30,14 +30,17 @@ class Truyen extends Model
         return $this->belongsToMany(TheLoai::class, 'truyen_the_loai', 'id_truyen', 'id_the_loai');
     }
 
+    // Quan hệ với bảng Chapter (các chương của truyện)
     public function chapters()
     {
         return $this->hasMany(Chapter::class, 'id_truyen', 'id');
     }
 
-    public function yeuthich()
+    // Quan hệ với bảng TruyenTheoDoi (theo dõi truyện)
+    public function nguoiTheoDoi()
     {
-        return $this->hasMany(YeuThich::class, 'truyen_id');
+        return $this->belongsToMany(User::class, 'truyen_theo_doi', 'truyen_id', 'user_id')
+                    ->withTimestamps();
     }
     
 }

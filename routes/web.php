@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\YeuThichController;
+use App\Http\Controllers\TheoDoiController;
+use app\Http\Controllers\TheLoaiController;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -61,5 +63,31 @@ Route::get('/truyen/{truyen}/chapter/{chapter}', [App\Http\Controllers\ChapterCo
 Route::post('/chapter/{chapter}/comment', [ChapterController::class, 'storeComment'])->name('comment.store');
 
 // Route cho yêu thích
-Route::post('/truyen/yeuthich', [YeuThichController::class, 'toggle'])->name('truyen.yeuthich');
-Route::get('/truyen/yeuthich', [YeuThichController::class, 'index'])->name('truyen.yeuthich.index');
+// Route::post('/truyen/yeuthich', [YeuThichController::class, 'toggle'])->name('truyen.yeuthich');
+// Route::get('/truyen/yeuthich', [YeuThichController::class, 'index'])->name('truyen.yeuthich.index');
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::post('/favorite/add', 'FavoriteController@add')->name('favorite.add');
+//     Route::post('/favorite/remove', 'FavoriteController@remove')->name('favorite.remove');
+//     Route::get('/favorite/check/{truyen_id}', 'FavoriteController@check')->name('favorite.check');
+// });
+
+// Các route cho chức năng theo dõi
+Route::post('/theo-doi/{id_truyen}', [TheoDoiController::class, 'toggleTheoDoi'])
+    ->name('theo-doi.toggle')
+    ->middleware('auth');
+
+// Route hiển thị danh sách truyện theo dõi
+Route::get('/theo-doi', [TheoDoiController::class, 'index'])
+    ->name('theo-doi.index')
+    ->middleware('auth');
+
+
+// Route tìm kiếm truyện
+Route::get('/search', [App\Http\Controllers\TruyenController::class, 'search'])->name('truyen.search');
+
+// Route hiển thị tất cả truyện
+Route::get('/truyen', [App\Http\Controllers\TruyenController::class, 'index'])->name('truyen.index');
+
+// Thêm route cho hiển thị truyện theo thể loại
+Route::get('/the-loai/{id}', [App\Http\Controllers\TheLoaiController::class, 'show'])->name('the-loai.show');

@@ -47,7 +47,7 @@ class HomeController extends Controller
             ->join('thong_ke_truyen', 'truyen.id', '=', 'thong_ke_truyen.id_truyen')
             ->orderBy('thong_ke_truyen.luot_xem', 'desc')
             ->select('truyen.*', 'thong_ke_truyen.luot_xem')
-            ->take(6)
+            ->take(3)
             ->get();
 
         

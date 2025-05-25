@@ -27,7 +27,7 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('theLoai', $theLoai);
         });
 
-        // Chia sẻ thông tin người dùng đăng nhập (nếu cần)
+        // Chia sẻ thông tin người dùng đăng nhập
         View::composer('*', function ($view) {
             $view->with('currentUser', auth()->user());
         });

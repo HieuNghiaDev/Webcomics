@@ -47,13 +47,16 @@ class User extends Authenticatable
     }
 
 
-    public function yeuthich()
+    public function dangTheoDoi($truyenId)
     {
-        return $this->hasMany(YeuThich::class, 'user_id');
+        return $this->hasMany(TheoDoi::class)
+            ->where('truyen_id', $truyenId)
+            ->exists();
     }
 
-    public function daYeuThich($truyenId)
+    public function truyenTheoDoi()
     {
-        return $this->yeuthich()->where('truyen_id', $truyenId)->exists();
+        return $this->belongsToMany(Truyen::class, 'truyen_theo_doi', 'user_id', 'truyen_id')
+                    ->withTimestamps();
     }
 }

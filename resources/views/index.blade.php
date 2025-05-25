@@ -26,7 +26,7 @@
                     <div class="swiper-wrapper">
                         @forelse($bannerTruyen as $truyen)
                             <div class="swiper-slide">
-                                <div class="hero-slide" style="background-image: url('{{ asset($truyen->anh_bia) }}')">
+                                <div class="hero-slide" style="background-image: url('{{ asset('assets/img/anh_banner/' . $truyen->anh_banner) }}')">
                                     <div class="hero-content">
                                         <h2>{{ $truyen->ten_truyen }}</h2>
                                         <p>{{ $truyen->mo_ta }}</p>
@@ -75,11 +75,11 @@
                                         <span class="manga-status hot">Mới</span>
                                     @endif
                                     <a href="{{ route('truyen.show', $truyen->id) }}">
-                                        <img src="{{ asset($truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
+                                        <img src="{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
                                     </a>
                                     <div class="manga-card-actions">
                                         <a href="{{ route('truyen.show', $truyen->id) }}" class="btn-read"><i class="fas fa-book-open"></i> Đọc ngay</a>
-                                        <a href="#" class="btn-favorite"><i class="far fa-heart"></i></a>
+                                        <!-- <a href="#" class="btn-favorite"><i class="far fa-heart"></i></a> -->
                                     </div>
                                 </div>
                                 <div class="manga-card-body">
@@ -120,17 +120,8 @@
                                         <!-- <span class="manga-status">Hot</span> -->
                                     @endif
                                     <a href="{{ route('truyen.show', $truyen->id) }}">
-                                        <img src="{{ asset($truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
+                                        <img src="{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
                                     </a>
-                                    <div class="manga-card-actions">
-                                        <a href="{{ route('truyen.show', $truyen->id) }}" class="btn-read"><i class="fas fa-book-open"></i> Đọc ngay</a>
-                                        <a href="javascript:void(0)" 
-                                        class="btn-favorite yeuthich-btn" 
-                                        data-truyen-id="{{ $truyen->id }}"
-                                        data-status="{{ Auth::check() && Auth::user()->daYeuThich($truyen->id) ? 'active' : 'inactive' }}">
-                                            <i class="fa{{ Auth::check() && Auth::user()->daYeuThich($truyen->id) ? 's' : 'r' }} fa-heart"></i>
-                                        </a>
-                                    </div>
                                 </div>
                                 <div class="manga-card-body">
                                     <h5 class="manga-title"><a href="{{ route('truyen.show', $truyen->id) }}">{{ $truyen->ten_truyen }}</a></h5>
@@ -168,7 +159,7 @@
                                 <div class="row g-0">
                                     <div class="col-4">
                                         <a href="{{ route('truyen.show', $truyen->id) }}">
-                                            <img src="{{ asset($truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
+                                            <img src="{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
                                         </a>
                                     </div>
                                     <div class="col-8">
@@ -224,6 +215,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom JavaScript -->
-    <script src="{{ asset('assets/js/yeuthich.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/yeuthich.js') }}"></script> -->
 </body>
 </html>

@@ -10,6 +10,8 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     
     <link rel="stylesheet" href="{{ asset('assets/css/chapter.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/comments.css') }}">
@@ -171,10 +173,11 @@
                             @forelse($comments as $comment)
                                 <div class="comment-item" id="comment-{{ $comment->id }}">
                                     <div class="comment-header d-flex align-items-center">
-                                        @if(Auth::user()->avatar)
-                                            <img src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                                        <!-- SỬA PHẦN NÀY: Sử dụng avatar của người bình luận -->
+                                        @if($comment->user->avatar)
+                                            <img src="{{ asset($comment->user->avatar) }}" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
                                         @else
-                                            <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                                            <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
                                         @endif
                                         <div>
                                             <h5 class="mb-0">{{ $comment->user->name }}</h5>
@@ -212,10 +215,11 @@
                                             @foreach($comment->replies as $reply)
                                                 <div class="reply-item mb-2" id="reply-{{ $reply->id }}">
                                                     <div class="reply-header d-flex align-items-center">
-                                                         @if(Auth::user()->avatar)
-                                                            <img src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                                                        <!-- SỬA PHẦN NÀY: Sử dụng avatar của người trả lời -->
+                                                        @if($reply->user->avatar)
+                                                            <img src="{{ asset($reply->user->avatar) }}" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
                                                         @else
-                                                            <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                                                            <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
                                                         @endif
                                                         <div>
                                                             <h6 class="mb-0">{{ $reply->user->name }}</h6>
