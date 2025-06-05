@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - Quản Trị HieuNghiaDev Manga</title>
+    <title>@yield('title') - Quản Trị 3M Online</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -66,8 +66,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('admin') }}">
-                <i class="fas fa-dragon me-2"></i>
-                <span>HieuNghiaDev Manga - Admin</span>
+                <!-- <img src="assets/img/logo/3monline_logo2.png" alt="3M online" height="50">
+                <span>3M Online - Admin</span> -->
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin">
                 <span class="navbar-toggler-icon"></span>
@@ -143,7 +143,7 @@
                         @yield('page-actions')
                     </div>
                 </div>
-
+            
                 <!-- Main content -->
                 @yield('content')
             </main>

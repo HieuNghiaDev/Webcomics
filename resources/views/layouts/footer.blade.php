@@ -17,7 +17,7 @@
         <div class="container-fluid container-xl">
             <div class="row py-4">
                 <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5>Về HieuNghiaDev Manga</h5>
+                    <h5>Về 3M Online</h5>
                     <p class="text-muted">Trang web đọc truyện tranh online miễn phí, cập nhật nhanh nhất với nhiều thể loại truyện tranh khác nhau.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="footer-bottom text-center py-3 border-top">
-                <p class="mb-0">&copy; 2025 HieuNghiaDev Manga. Tất cả quyền được bảo lưu.</p>
+                <p class="mb-0">&copy; 2025 3M Online. Tất cả quyền được bảo lưu.</p>
             </div>
         </div>
     </footer>

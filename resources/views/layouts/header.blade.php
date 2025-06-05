@@ -21,7 +21,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2 col-6">
                         <a href="/" class="logo d-flex align-items-center">
-                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/17/7c/c5/177cc56c-f685-158d-917f-af4cfbeed4ac/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/1200x630wa.png" alt="HieuNghiaDev Manga" height="50">
+                           <img src="{{ asset('assets/img/logo/3monline_logo2.png') }}" alt="3M online" height="50">
                         </a>
                     </div>
                     
@@ -78,7 +78,7 @@
                                     <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user-circle me-2"></i>Hồ sơ của tôi</a></li>
                                     <li><a class="dropdown-item" href="{{ route('theo-doi.index') }}"><i class="fas fa-bell me-2"></i>Truyện theo dõi</a></li>
                                     @if(Auth::user()->role == 1)
-                                        <li><a class="dropdown-item" href="{{ route('admin') }}"><i class="fa-solid fa-book"></i>Quản lý truyện</a></li>
+                                       <li><a class="dropdown-item" href="{{ route('author.dashboard') }}"><i class="fa-solid fa-book"></i>Quản lý truyện</a></li>
                                     @endif
                                     <li><hr class="dropdown-divider"></li>
                                     <li>

@@ -93,7 +93,7 @@
                                                         {{ $truyen->luot_xem }}
                                                     @endif
                                                     lượt xem</span>
-                                        <span><i class="fas fa-star text-warning"></i> 4.9</span>
+                                        <span> {{ number_format($truyen->rating, 1, '.', '') }}/5 <i class="fas fa-star text-warning"></i></span>
                                     </div>
                                     <div class="manga-update">Chap mới nhất</div>
                                 </div>
@@ -140,7 +140,7 @@
                                                     @endif
                                                     lượt xem
                                         </span>
-                                        <span><i class="fas fa-star text-warning"></i> 4.5</span>
+                                         <span> {{ number_format($truyen->rating, 1, '.', '') }}/5 <i class="fas fa-star text-warning"></i> </span>
                                     </div>
                                     <div class="manga-update">Chap {{ $truyen->chap_moi_nhat }}</div>
                                 </div>
@@ -187,7 +187,7 @@
                                                     @endif
                                                     lượt xem
                                         </span>
-                                        <span><i class="fas fa-star text-warning"></i> 4.5</span>
+                                         <span>{{ number_format($truyen->rating, 1, '.', '') }}/5 <i class="fas fa-star text-warning"></i> </span>
                                     </div>
                                     <div class="manga-update">Chap {{ $truyen->chap_moi_nhat }}</div>
                                 </div>
@@ -241,7 +241,7 @@
                                                     @endif
                                                     lượt xem
                                                 </div>
-                                                <div><i class="fas fa-star text-warning"></i> 4.9/5 sao</div>
+                                                 <span>{{ number_format($truyen->rating, 1, '.', '') }}/5 <i class="fas fa-star text-warning"></i> </span>
                                                 <div><i class="fas fa-bookmark"></i> Chap {{ $truyen->chap_moi_nhat }}</div>
                                             </div>
                                             <p class="manga-desc">{{ \Illuminate\Support\Str::limit($truyen->mo_ta, 100, '...') }}</p>

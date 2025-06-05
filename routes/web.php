@@ -10,15 +10,11 @@ use App\Http\Controllers\TheoDoiController;
 use app\Http\Controllers\TheLoaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthorController;
 
 // Route::get('/', function () {
 //     return view('index');
 // });
-
-// // Trang chủ
-Route::get('/', function () {
-    return view('<layouts>header');
-});
 
 // Trang chủ
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index')->middleware('auth');
@@ -50,6 +46,21 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/truyen/xoa/{id}', [AdminController::class, 'xoaTruyen'])->name('truyen.xoa');
 });
 
+// Route cho tác giả
+Route::prefix('author')->middleware('auth')->group(function () {
+    Route::get('/', [AuthorController::class, 'dashboard'])->name('author.dashboard');
+    Route::match(['get', 'post'], '/addComic', [AuthorController::class, 'addComic'])->name('author.addComic');
+    Route::match(['get', 'post'], '/editComic/{id}', [AuthorController::class, 'editComic'])->name('author.editComic');
+    Route::get('/viewComic/{id}', [AuthorController::class, 'viewComic'])->name('author.viewsComic');
+    Route::get('/delete-comic/{id}', [AuthorController::class, 'deleteComic'])->name('author.delete_comic');
+});
+
+// Route::get('/author', [AuthorController::class, 'dashboard'])->name('author.dashboard');
+// Route::match(['get', 'post'], '/author/addComic', [AuthorController::class, 'addComic'])->name('author.addComic');
+// Route::match(['get', 'post'], '/author/editComic/{id}', [AuthorController::class, 'editComic'])->name('author.editComic');
+// Route::get('/author/viewComic/{id}', [AuthorController::class, 'viewComic'])->name('author.viewsComic');
+// Route::get('/author/delete-comic/{id}', [AuthorController::class, 'deleteComic'])->name('author.delete_comic');
+
 // Route đăng ký
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
@@ -61,11 +72,14 @@ Route::get('/forgot-password', function() {
 
 //
 Route::get('the-loai/{id}', [App\Http\Controllers\TheLoaiController::class, 'show'])->name('the-loai.show');
-Route::get('the-loai', [App\Http\Controllers\TheLoaiController::class, 'index'])->name('the-loai.index');
+// Route::get('the-loai', [App\Http\Controllers\TheLoaiController::class, 'index'])->name('the-loai.index');
 
 
 // Route::get('/truyen', [App\Http\Controllers\TruyenController::class, 'index'])->name('truyen.index');
 Route::get('/truyen/{id}', [App\Http\Controllers\TruyenController::class, 'show'])->name('truyen.show');
+
+// Thêm route cho rating
+Route::post('/truyen/{truyen}/rating', [App\Http\Controllers\RatingController::class, 'store'])->name('rating.store');
 
 // Route để đọc từ chương đầu tiên
 Route::get('/truyen/{truyen}/chapter', [App\Http\Controllers\ChapterController::class, 'firstChapter'])
@@ -103,11 +117,11 @@ Route::get('/truyen', [App\Http\Controllers\TruyenController::class, 'index'])->
 Route::get('/the-loai/{id}', [App\Http\Controllers\TheLoaiController::class, 'show'])->name('the-loai.show');
 
 // Routes cho quản lý hồ sơ cá nhân
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile/password', [ProfileController::class, 'showPasswordForm'])->name('profile.password.form');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
-    Route::post('/profile/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
+Route::prefix('profile')->middleware(['auth'])->group(function () {
+    Route::get('/', [ProfileController::class, 'show'])->name('profile');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/password', [ProfileController::class, 'showPasswordForm'])->name('profile.password.form');
+    Route::put('/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+    Route::post('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
 });

@@ -36,28 +36,6 @@
             
             <div class="row">
                 <div class="col-12">
-                    <div class="reading-settings">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="bg-mode-switcher">
-                                <span class="me-2">Nền:</span>
-                                <button class="btn btn-sm btn-light active" id="light-mode"><i class="fas fa-sun"></i></button>
-                                <button class="btn btn-sm btn-dark" id="dark-mode"><i class="fas fa-moon"></i></button>
-                            </div>
-                            
-                            <div class="action-buttons">
-                                <button class="btn btn-sm action-button favorite-btn" id="favorite-btn">
-                                    <i class="far fa-heart"></i> Yêu thích
-                                </button>
-                                
-                                <a href="{{ route('chapter.show', ['truyen' => $truyen->id, 'chapter' => $truyen->chapters()->orderBy('so_chap', 'desc')->first()->id]) }}" 
-                                   class="btn btn-sm action-button latest-btn">
-                                    <i class="fas fa-bolt"></i> Chap mới nhất
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Thanh điều hướng chương -->
                     <div class="chapter-navigation">
                         <div class="d-flex justify-content-between">
                             <a href="{{ $prevChapter ? route('chapter.show', ['truyen' => $truyen->id, 'chapter' => $prevChapter->id]) : '#' }}" 
@@ -179,7 +157,11 @@
                                             <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
                                         @endif
                                         <div>
-                                            <h5 class="mb-0">{{ $comment->user->name }}</h5>
+                                            @if($comment->user->role == '1')
+                                                <h5 class="mb-0">{{ $comment->user->name }} <span class="badge bg-danger">Tài Khoản dịch thuật</span></h5>
+                                            @else
+                                                <h5 class="mb-0">{{ $comment->user->name }}</h5>
+                                            @endif
                                             <small class="text-muted">{{ \Carbon\Carbon::parse($comment->ngay_dang)->diffForHumans() }}</small>
                                         </div>
                                     </div>
@@ -220,7 +202,11 @@
                                                             <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
                                                         @endif
                                                         <div>
-                                                            <h6 class="mb-0">{{ $reply->user->name }}</h6>
+                                                            @if($reply->user->role == '1')
+                                                                <h6 class="mb-0">{{ $reply->user->name }} <span class="badge bg-danger">Tài Khoản dịch thuật</span></h6>
+                                                            @else
+                                                                <h6 class="mb-0">{{ $reply->user->name }}</h6>
+                                                            @endif
                                                             <small class="text-muted">{{ \Carbon\Carbon::parse($reply->ngay_dang)->diffForHumans() }}</small>
                                                         </div>
                                                     </div>
@@ -265,149 +251,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        $(document).ready(function() {
-            saveReadingHistory(
-                {{ $truyen->id }},
-                {{ $chapter->id }},
-                '{{ $chapter->ten_chap }}'
-            );
-            
-            // Back to top button
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 200) {
-                    $('#backToTop').fadeIn();
-                    $('#goToComments').fadeIn();
-                } else {
-                    $('#backToTop').fadeOut();
-                    $('#goToComments').fadeOut();
-                }
-            });
-            
-            $('#backToTop').click(function(e) {
-                e.preventDefault();
-                $('html, body').animate({scrollTop: 0}, 'slow');
-            });
-            
-            $('#goToComments').click(function(e) {
-                e.preventDefault();
-                $('html, body').animate({scrollTop: $('#comments').offset().top - 100}, 'slow');
-            });
-            
-            // Highlight comment khi nhảy đến fragment
-            if (window.location.hash) {
-                let targetElement = $(window.location.hash);
-                if (targetElement.length) {
-                    // Đảm bảo cuộn đến đúng vị trí
-                    setTimeout(function() {
-                        $('html, body').animate({
-                            scrollTop: targetElement.offset().top - 120
-                        }, 'slow');
-                        
-                        // Thêm class highlight
-                        targetElement.addClass('highlight-target');
-                        setTimeout(function() {
-                            targetElement.removeClass('highlight-target');
-                        }, 2000);
-                    }, 500);
-                }
-            }
-            
-            // Favorite button
-            $('#favorite-btn').click(function() {
-                $(this).toggleClass('active');
-                
-                if ($(this).hasClass('active')) {
-                    $(this).html('<i class="fas fa-heart"></i> Đã thích');
-                    
-                    // Gửi Ajax request để lưu truyện vào danh sách yêu thích (trong thực tế)
-                    // $.post('/favorite/add', {truyen_id: {{ $truyen->id }}});
-                } else {
-                    $(this).html('<i class="far fa-heart"></i> Yêu thích');
-                    
-                    // Gửi Ajax request để xóa truyện khỏi danh sách yêu thích (trong thực tế)
-                    // $.post('/favorite/remove', {truyen_id: {{ $truyen->id }}});
-                }
-            });
-            
-            // Dark mode / Light mode
-            $('#dark-mode').click(function() {
-                $('body').addClass('dark-mode');
-                $(this).addClass('active');
-                $('#light-mode').removeClass('active');
-                localStorage.setItem('reading-mode', 'dark');
-            });
-            
-            $('#light-mode').click(function() {
-                $('body').removeClass('dark-mode');
-                $(this).addClass('active');
-                $('#dark-mode').removeClass('active');
-                localStorage.setItem('reading-mode', 'light');
-            });
-            
-            // Lấy chế độ từ localStorage khi tải trang
-            const savedMode = localStorage.getItem('reading-mode');
-            if (savedMode === 'dark') {
-                $('#dark-mode').click();
-            }
-            
-            // Hiển thị form trả lời
-            $('.reply-btn').click(function() {
-                const commentId = $(this).data('comment-id');
-                $('#reply-form-' + commentId).toggle();
-            });
-            
-            // Keyboard navigation
-            $(document).keydown(function(e) {
-                // mui ten phai -  chapter sau
-                if (e.keyCode == 39) {
-                    const nextChapterLink = $('.chapter-navigation a:contains("Chương sau"):not(.disabled)').first();
-                    if (nextChapterLink.length) {
-                        window.location.href = nextChapterLink.attr('href');
-                    }
-                }
-                
-                // mui ten trai -  chapter trước
-                if (e.keyCode == 37) {
-                    const prevChapterLink = $('.chapter-navigation a:contains("Chương trước"):not(.disabled)').first();
-                    if (prevChapterLink.length) {
-                        window.location.href = prevChapterLink.attr('href');
-                    }
-                }
-            });
-            
-            // animation cho nút gửi bình luận
-            $('form').submit(function() {
-                const submitBtn = $(this).find('button[type="submit"]');
-                submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Đang gửi...');
-            });
-        });
-        
-        // Hàm lưu lịch sử đọc
-        function saveReadingHistory(truyenId, chapterId, chapterTitle) {
-            const historyItem = {
-                truyenId: truyenId,
-                chapterId: chapterId,
-                chapterTitle: chapterTitle,
-                timestamp: new Date().getTime()
-            };
-            
-            let readingHistory = JSON.parse(localStorage.getItem('readingHistory')) || [];
-            
-            const existingIndex = readingHistory.findIndex(item => item.truyenId === truyenId);
-            
-            if (existingIndex !== -1) {
-
-                readingHistory[existingIndex] = historyItem;
-            } else {
-                readingHistory.push(historyItem);
-            }
-            
-            if (readingHistory.length > 20) {
-                readingHistory = readingHistory.slice(-20);
-            }
-            
-            localStorage.setItem('readingHistory', JSON.stringify(readingHistory));
-        }
+        // Xử lý sự kiện click cho nút "Trả lời" trong bình luận
+        $(document).on('click', '.reply-btn', function() {
+            var commentId = $(this).data('comment-id');
+            $('#reply-form-' + commentId).toggle();
+        }); 
     </script>
+
 </body>
 </html>

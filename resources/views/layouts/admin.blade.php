@@ -66,8 +66,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('admin') }}">
-                <i class="fas fa-dragon me-2"></i>
-                <span>HieuNghiaDev Manga - Admin</span>
+                <img src="{{ asset('assets/img/logo/3monline_logo2.png') }}" alt="3M online" height="50">
+                <span>3M Online - Admin</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin">
                 <span class="navbar-toggler-icon"></span>

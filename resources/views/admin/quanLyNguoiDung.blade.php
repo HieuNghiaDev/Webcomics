@@ -23,19 +23,6 @@
                         </button>
                     </div>
                 </div>
-                <!-- <div class="col-md-3">
-                    <select name="sort" class="form-select" onchange="this.form.submit()">
-                        <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Ngày tạo</option>
-                        <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Tên</option>
-                        <option value="email" {{ request('sort') == 'email' ? 'selected' : '' }}>Email</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select name="order" class="form-select" onchange="this.form.submit()">
-                        <option value="desc" {{ request('order') == 'desc' || !request('order') ? 'selected' : '' }}>Giảm dần</option>
-                        <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Tăng dần</option>
-                    </select>
-                </div> -->
             </div>
         </form>
 

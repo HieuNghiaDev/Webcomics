@@ -193,9 +193,9 @@
                     <div class="card-body p-4">
                         <div class="text-center py-5">
                             <div class="mb-3">
-                                <i class="fas fa-history fa-3x text-muted"></i>
+                               <i class="fa-solid fa-timeline"></i>
                             </div>
-                            <p class="text-muted">Chưa có lịch sử đọc nào</p>
+                            <p class="text-muted">Tính năng đang trong quá trình phát triển</p>
                             <a href="{{ route('truyen.index') }}" class="btn btn-primary mt-2">Khám phá truyện</a>
                         </div>
                     </div>

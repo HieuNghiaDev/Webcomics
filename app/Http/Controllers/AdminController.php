@@ -12,33 +12,19 @@ use App\Models\TheLoai;
 
 class AdminController extends Controller
 {
-    // Kiểm tra quyền admin trong constructor
-    // public function __construct()
-    // {
-    //     $this->middleware(function ($request, $next) {
-    //         if (Auth::user()->role != 2) {
-    //             return redirect('/')->with('error', 'Bạn không có quyền truy cập trang quản trị.');
-    //         }
-    //         return $next($request);
-    //     });
-    // }
-
-    // Trang chủ admin
     public function trangChu()
     {
         $totalUsers = User::count();
         $totalTruyen = Truyen::count();
         $newTruyen = Truyen::where('ngay_dang', '>=', now()->subDays(7))->count();
         
-        return view('admin.trangChu', compact('totalUsers', 'totalTruyen', 'newTruyen'));
+        return view('layouts.admin', compact('totalUsers', 'totalTruyen', 'newTruyen'));
     }
 
-    // QUẢN LÝ NGƯỜI DÙNG
     public function quanLyNguoiDung(Request $request)
     {
         $query = User::query();
         
-        // Tìm kiếm
         if ($request->has('search')) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
@@ -46,11 +32,7 @@ class AdminController extends Controller
                   ->orWhere('email', 'like', "%{$search}%");
             });
         }
-        
-        // Sắp xếp
-        // $sortField = $request->input('sort', 'created_at');
-        // $sortOrder = $request->input('order', 'desc');
-        // $query->orderBy($sortField, $sortOrder);
+
         
         $users = $query->paginate(10);
         
@@ -123,29 +105,21 @@ class AdminController extends Controller
         return redirect()->route('nguoiDung')->with('success', 'Đã xóa tài khoản!');
     }
 
-    // QUẢN LÝ TRUYỆN
     public function quanLyTruyen(Request $request)
     {
         $query = Truyen::with('theLoai');
         
-        // Tìm kiếm
         if ($request->has('search')) {
             $search = $request->search;
             $query->where('ten_truyen', 'like', "%{$search}%");
         }
-        
-        // Lọc theo thể loại
+
         if ($request->has('the_loai') && $request->the_loai != '') {
             $query->whereHas('theLoai', function($q) use ($request) {
                 $q->where('id', $request->the_loai);
             });
         }
-        
-        // Sắp xếp
-        $sortField = $request->input('sort', 'ngay_update');
-        $sortOrder = $request->input('order', 'desc');
-        $query->orderBy($sortField, $sortOrder);
-        
+   
         $truyen = $query->paginate(10);
         $theLoai = TheLoai::all();
         

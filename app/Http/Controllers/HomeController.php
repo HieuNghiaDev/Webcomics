@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Debug để xem có lấy được dữ liệu thể loại không
+        // Lấy tất cả thể loại
         $theLoai = TheLoai::all();
         \Log::info('Số thể loại: ' . $theLoai->count());
 
@@ -35,15 +35,7 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        //truyen Hot
-        // $truyenHot = Truyen::with('theLoai')
-        //     ->join('truyen_the_loai', 'truyen.id', '=', 'truyen_the_loai.id_truyen')
-        //     ->join('thong_ke_truyen', 'truyen.id', '=', 'thong_ke_truyen.id_truyen')
-        //     ->orderBy('thong_ke_truyen.luot_xem', 'desc')
-        //     ->take(3)
-        //     ->get();
-
-        $truyenHot = Truyen::with('theLoai') // Eager loading thể loại
+        $truyenHot = Truyen::with('theLoai')
             ->join('thong_ke_truyen', 'truyen.id', '=', 'thong_ke_truyen.id_truyen')
             ->orderBy('thong_ke_truyen.luot_xem', 'desc')
             ->select('truyen.*', 'thong_ke_truyen.luot_xem')

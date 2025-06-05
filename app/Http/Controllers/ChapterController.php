@@ -47,7 +47,7 @@ class ChapterController extends Controller
                             ->orderBy('so_chap', 'asc')
                             ->first();
         
-        // Lấy danh sách bình luận gốc (parent_id = 0)
+        // Lấy danh sách bình luận
         $comments = Comment::with(['user', 'replies.user'])
                         ->where('id_chap', $chapterId)
                         ->where('parent_id', 0) 

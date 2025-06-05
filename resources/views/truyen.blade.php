@@ -6,6 +6,8 @@
     <title>{{ $truyen->ten_truyen }} - Chi tiết truyện</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
@@ -15,6 +17,13 @@
 </head>
 <body>
     @include('layouts.header')
+
+    <!-- @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show container-fluid container-xl mt-3" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif -->
 
     <!-- @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -52,10 +61,18 @@
                                 </div>
                             </div>
                             
-                            <!-- Truyện Info -->
+                            <!-- Thông tin truyện -->
                             <div class="col-md-8">
                                 <h1 class="detail-title">{{ $truyen->ten_truyen }}</h1>
                                 
+                                <div class="info-item"><strong>Tác giả:</strong> {{ $truyen->tac_gia }}</div>
+                                <div class="info-item"><strong>Trạng thái:</strong> 
+                                    @if($truyen->tinh_trang == 1)
+                                        <span class="badge bg-success">Đã hoàn thành</span>
+                                    @else
+                                        <span class="badge bg-danger">Đang cập nhật</span>
+                                    @endif
+                                </div>
                                 <div class="info-item"><strong>Ngày đăng tải:</strong> {{ $truyen->ngay_dang }}</div>
                                 <div class="info-item"><strong>Cập nhật:</strong> {{ $truyen->ngay_update }}</div>
                                 <div class="info-item">
@@ -63,6 +80,48 @@
                                     @foreach($truyen->theLoai as $theLoai)
                                         <a href="{{ route('the-loai.show', $theLoai->id) }}" class="badge bg-primary">{{ $theLoai->ten_the_loai }}</a>
                                     @endforeach
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="col-md-6">
+                                        <div class="rating-card">
+                                            <strong>Đánh Giá: {{ number_format($truyen->rating, 1, '.', '') }}/5</strong>
+                                            <span class="small text-muted">({{ $truyen->ratings()->count() }} đánh giá)</span>
+                                            
+                                            @auth
+                                                @php
+                                                    $userRating = $truyen->getUserRating(Auth::id());
+                                                @endphp
+                                                
+                                                <form action="{{ route('rating.store', $truyen->id) }}" method="POST">
+                                                    @csrf
+                                                    <div class="star-rating animated-stars">
+                                                        <input type="radio" id="star5" name="rating" value="5" {{ $userRating && $userRating->rating == 5 ? 'checked' : '' }} onchange="this.form.submit()">
+                                                        <label for="star5" class="bi bi-star-fill"></label>
+                                                        <input type="radio" id="star4" name="rating" value="4" {{ $userRating && $userRating->rating == 4 ? 'checked' : '' }} onchange="this.form.submit()">
+                                                        <label for="star4" class="bi bi-star-fill"></label>
+                                                        <input type="radio" id="star3" name="rating" value="3" {{ $userRating && $userRating->rating == 3 ? 'checked' : '' }} onchange="this.form.submit()">
+                                                        <label for="star3" class="bi bi-star-fill"></label>
+                                                        <input type="radio" id="star2" name="rating" value="2" {{ $userRating && $userRating->rating == 2 ? 'checked' : '' }} onchange="this.form.submit()">
+                                                        <label for="star2" class="bi bi-star-fill"></label>
+                                                        <input type="radio" id="star1" name="rating" value="1" {{ $userRating && $userRating->rating == 1 ? 'checked' : '' }} onchange="this.form.submit()">
+                                                        <label for="star1" class="bi bi-star-fill"></label>
+                                                    </div>
+                                                    @if($userRating)
+                                                        <small class="d-block text-muted mt-1">Đánh giá của bạn: {{ $userRating->rating }}/5</small>
+                                                    @endif
+                                                </form>
+                                            @else
+                                                <div class="star-rating animated-stars readonly">
+                                                    @for($i = 5; $i >= 1; $i--)
+                                                        <input type="radio" id="star{{ $i }}" disabled {{ round($truyen->rating) == $i ? 'checked' : '' }}>
+                                                        <label for="star{{ $i }}" class="bi bi-star-fill"></label>
+                                                    @endfor
+                                                </div>
+                                                <small class="d-block text-muted mt-1"><a href="{{ route('login') }}">Đăng nhập</a> để đánh giá</small>
+                                            @endauth
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <div class="d-none d-md-block">
@@ -188,5 +247,15 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
+            star.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>

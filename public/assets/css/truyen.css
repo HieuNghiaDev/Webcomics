@@ -161,6 +161,92 @@
     }
 }
 
+.star-rating {
+    direction: rtl;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    font-size: 24px;
+    padding: 0 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label,
+.star-rating input:checked~label {
+    color: #ffc107;
+}
+
+/* CSS đơn giản cho rating */
+.rating-stars {
+    margin: 10px 0;
+}
+
+.rating-stars .star-group {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.rating-stars .star-value {
+    font-weight: bold;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+.rating-stars .star-label {
+    color: #f8ce0b;
+    margin-left: 5px;
+}
+
+.rating-value {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #f8ce0b;
+}
+
+.rating-count {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Hiển thị sao màu vàng */
+.stars-display {
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+}
+
+.stars-bg {
+    color: #ccc;
+}
+
+.stars-fg {
+    color: #f8ce0b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.user-current-rating {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border-left: 3px solid #f8ce0b;
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     body.dark-theme .detail-card,
