@@ -51,7 +51,13 @@
                                     @endif
                                     <div class="user-info ms-2 d-none d-sm-block">
                                         <div class="user-name">{{ Auth::user()->name }}</div>
-                                        <div class="user-status">Thành viên</div>
+                                        @if(Auth::user()->role == 2)
+                                            <small class="text-danger">Quản trị viên</small>
+                                        @elseif(Auth::user()->role == 1)
+                                            <small class="text-success">Tài khoản dịch thuật</small>
+                                        @else
+                                            <small class="text-secondary">Người dùng</small>
+                                        @endif
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userDropdown">
@@ -71,7 +77,9 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user-circle me-2"></i>Hồ sơ của tôi</a></li>
                                     <li><a class="dropdown-item" href="{{ route('theo-doi.index') }}"><i class="fas fa-bell me-2"></i>Truyện theo dõi</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>Lịch sử đọc</a></li>
+                                    @if(Auth::user()->role == 1)
+                                        <li><a class="dropdown-item" href="{{ route('admin') }}"><i class="fa-solid fa-book"></i>Quản lý truyện</a></li>
+                                    @endif
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form action="{{ route('logout') }}" method="POST" id="logout-form">

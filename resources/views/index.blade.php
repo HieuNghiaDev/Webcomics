@@ -26,7 +26,8 @@
                     <div class="swiper-wrapper">
                         @forelse($bannerTruyen as $truyen)
                             <div class="swiper-slide">
-                                <div class="hero-slide" style="background-image: url('{{ asset('assets/img/anh_banner/' . $truyen->anh_banner) }}')">
+                                <!-- <div class="hero-slide" style="background-image: url('{{ asset('assets/img/anh_banner/' . $truyen->anh_banner) }}')"> -->
+                                <div class="hero-slide" style="background-image: url('{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}')">
                                     <div class="hero-content">
                                         <h2>{{ $truyen->ten_truyen }}</h2>
                                         <p>{{ $truyen->mo_ta }}</p>
@@ -108,6 +109,53 @@
             <div class="container-fluid container-xl">
                 <div class="section-title">
                     <h2><i class="fas fa-calendar-alt text-info me-2"></i>Mới cập nhật</h2>
+                    <a href="{{ route('truyen.index') }}" class="view-all">Xem tất cả <i class="fas fa-angle-right ms-1"></i></a>
+                </div>
+                <div class="row">
+                    @foreach($truyenMoi as $truyen)
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
+                            <div class="manga-card">
+                                <div class="manga-card-img">
+                                    @if($truyen->ngay_update > now()->subDays(7))
+                                        <span class="manga-status new">Mới</span>
+                                        <!-- <span class="manga-status">Hot</span> -->
+                                    @endif
+                                    <a href="{{ route('truyen.show', $truyen->id) }}">
+                                        <img src="{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
+                                    </a>
+
+                                     <div class="manga-card-actions">
+                                        <a href="{{ route('truyen.show', $truyen->id) }}" class="btn-read"><i class="fas fa-book-open"></i> Đọc ngay</a>  
+                                    </div>
+                                </div>
+                                
+                                <div class="manga-card-body">
+                                    <h5 class="manga-title"><a href="{{ route('truyen.show', $truyen->id) }}">{{ $truyen->ten_truyen }}</a></h5>
+                                    <div class="manga-info">
+                                        <span><i class="fas fa-eye"></i> 
+                                                    @if($truyen->luot_xem >= 1000)
+                                                        {{ number_format($truyen->luot_xem / 1000, 1) }}k
+                                                    @else
+                                                        {{ $truyen->luot_xem }}
+                                                    @endif
+                                                    lượt xem
+                                        </span>
+                                        <span><i class="fas fa-star text-warning"></i> 4.5</span>
+                                    </div>
+                                    <div class="manga-update">Chap {{ $truyen->chap_moi_nhat }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <!-- Truyện Chữ -->
+        <section class="manga-section">
+            <div class="container-fluid container-xl">
+                <div class="section-title">
+                    <h2><i class="fa-solid fa-book text-info me-2"></i>Truyện Chữ</h2>
                     <a href="{{ route('truyen.index') }}" class="view-all">Xem tất cả <i class="fas fa-angle-right ms-1"></i></a>
                 </div>
                 <div class="row">

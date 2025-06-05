@@ -42,6 +42,17 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Vai trò</label>
+                        <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
+                            <option value="0" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>Người dùng</option>
+                            <option value="1" {{ old('role', $user->role) == 'minadmin' ? 'selected' : '' }}>Tài khoản dịch thuật</option>
+                            <option value="2" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Quản trị viên</option>
+                        </select>
+                        @error('role')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">

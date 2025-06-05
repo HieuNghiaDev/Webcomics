@@ -25,11 +25,11 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => md5($request->password),
+            'password' => Hash::make($request->password),
         ]);
 
         Auth::login($user);
 
-        return redirect('/home');
+        return redirect('/login')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
     }
 }

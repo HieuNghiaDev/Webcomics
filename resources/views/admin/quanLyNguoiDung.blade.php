@@ -13,7 +13,6 @@
 @section('content')
 <div class="card border-0 shadow-sm">
     <div class="card-body">
-        <!-- Tìm kiếm và lọc -->
         <form action="{{ route('nguoiDung') }}" method="GET" class="mb-4">
             <div class="row g-2">
                 <div class="col-md-6">
@@ -24,7 +23,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <select name="sort" class="form-select" onchange="this.form.submit()">
                         <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Ngày tạo</option>
                         <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Tên</option>
@@ -36,7 +35,7 @@
                         <option value="desc" {{ request('order') == 'desc' || !request('order') ? 'selected' : '' }}>Giảm dần</option>
                         <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Tăng dần</option>
                     </select>
-                </div>
+                </div> -->
             </div>
         </form>
 
@@ -45,7 +44,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Tên người dùng</th>
                         <th scope="col">Email</th>
                         <th scope="col">Vai trò</th>
@@ -62,8 +61,10 @@
                         <td>
                             @if ($user->role == 2)
                                 <span class="badge bg-danger">Admin</span>
-                            @else
+                            @elseif ($user->role == 0)
                                 <span class="badge bg-secondary">User</span>
+                             @else
+                                <span class="badge bg-success">Tài khoản dịch thuật</span>
                             @endif
                         </td>
                         <td>{{ $user->created_at->format('d/m/Y') }}</td>

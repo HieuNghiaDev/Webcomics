@@ -48,9 +48,9 @@ class AdminController extends Controller
         }
         
         // Sắp xếp
-        $sortField = $request->input('sort', 'created_at');
-        $sortOrder = $request->input('order', 'desc');
-        $query->orderBy($sortField, $sortOrder);
+        // $sortField = $request->input('sort', 'created_at');
+        // $sortOrder = $request->input('order', 'desc');
+        // $query->orderBy($sortField, $sortOrder);
         
         $users = $query->paginate(10);
         
@@ -93,7 +93,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:users,name,'.$id,
             'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-            'role' => 'required|in:0,2',
+            'role' => 'required|in:0,1,2',
             'password' => 'nullable|string|min:6',
         ]);
         
@@ -102,7 +102,7 @@ class AdminController extends Controller
         $user->role = $validated['role'];
         
         if (!empty($validated['password'])) {
-            $user->password = md5($validated['password']);
+            $user->password = Hash::make($request->password);
         }
         
         $user->save();

@@ -24,27 +24,6 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <select name="the_loai" class="form-select" onchange="this.form.submit()">
-                        <option value="">Tất cả thể loại</option>
-                        @foreach($theLoai as $tl)
-                            <option value="{{ $tl->id }}" {{ request('the_loai') == $tl->id ? 'selected' : '' }}>{{ $tl->ten_the_loai }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select name="sort" class="form-select" onchange="this.form.submit()">
-                        <option value="ngay_update" {{ request('sort') == 'ngay_update' ? 'selected' : '' }}>Ngày cập nhật</option>
-                        <option value="ten_truyen" {{ request('sort') == 'ten_truyen' ? 'selected' : '' }}>Tên truyện</option>
-                        <option value="luot_xem" {{ request('sort') == 'luot_xem' ? 'selected' : '' }}>Lượt xem</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="order" class="form-select" onchange="this.form.submit()">
-                        <option value="desc" {{ request('order') == 'desc' || !request('order') ? 'selected' : '' }}>Giảm dần</option>
-                        <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Tăng dần</option>
-                    </select>
-                </div>
             </div>
         </form>
 
@@ -53,7 +32,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Ảnh bìa</th>
                         <th scope="col">Tên truyện</th>
                         <th scope="col">Tác giả</th>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -21,11 +22,12 @@ class LoginController extends Controller
         ]);
 
         $user = User::where('name', $credentials['name'])->first();
-        
-        if ($user && md5($credentials['password']) === $user->password) {
+
+        // Kiểm tra password bằng Hash::check
+        if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::login($user);
             $request->session()->regenerate();
-            
+
             // Kiểm tra role người dùng
             if ($user->role == 2) {
                 return redirect('/admin');
@@ -33,7 +35,7 @@ class LoginController extends Controller
                 return redirect('/');
             }
         }
-        
+
         return back()->withErrors([
             'name' => 'Thông tin đăng nhập không chính xác.',
         ])->withInput($request->only('name'));
