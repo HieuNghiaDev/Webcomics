@@ -1,0 +1,306 @@
+/* =========================================
+   BẢNG XẾP HẠNG STYLES (Đơn giản hóa)
+   ========================================= */
+
+/* Tiêu đề */
+.section-title {
+    margin-bottom: 25px;
+    border-left: 4px solid #007bff;
+    padding-left: 15px;
+}
+
+.section-title h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+}
+
+.section-title p {
+    color: #777;
+    font-size: 1rem;
+}
+
+/* Tabs đơn giản hóa */
+.ranking-tabs {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.ranking-tabs .nav-item {
+    margin-bottom: -1px;
+}
+
+.ranking-tabs .nav-link {
+    color: #555;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    transition: all 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.ranking-tabs .nav-link:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+.ranking-tabs .nav-link.active {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    font-weight: 600;
+}
+
+/* Danh sách xếp hạng */
+.ranking-list {
+    margin-top: 20px;
+}
+
+.ranking-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    border: 1px solid #eee;
+}
+
+.ranking-item:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-color: #ddd;
+}
+
+/* Top 3 items */
+.ranking-item:nth-child(1) {
+    background-color: rgba(255, 87, 34, 0.02);
+    border-left: 3px solid #FF5722;
+}
+
+.ranking-item:nth-child(2) {
+    background-color: rgba(255, 152, 0, 0.02);
+    border-left: 3px solid #FF9800;
+}
+
+.ranking-item:nth-child(3) {
+    background-color: rgba(255, 193, 7, 0.02);
+    border-left: 3px solid #FFC107;
+}
+
+/* Số thứ tự */
+.rank-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.rank-number.top-rank {
+    color: #fff;
+}
+
+.rank-number.top-1 {
+    background-color: #FF5722;
+    font-size: 20px;
+}
+
+.rank-number.top-2 {
+    background-color: #FF9800;
+}
+
+.rank-number.top-3 {
+    background-color: #FFC107;
+}
+
+/* Ảnh bìa */
+.rank-image-wrapper {
+    display: block;
+    position: relative;
+    padding-top: 140%;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.rank-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Thông tin truyện */
+.rank-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.rank-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.rank-title a:hover {
+    color: #007bff;
+}
+
+.rank-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.rank-meta a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.rank-meta a:hover {
+    text-decoration: underline;
+}
+
+.rank-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.rank-stats span {
+    display: flex;
+    align-items: center;
+}
+
+.rank-stats i {
+    margin-right: 5px;
+}
+
+.rank-stats .views i {
+    color: #2980b9;
+}
+
+.rank-stats .rating i {
+    color: #f39c12;
+}
+
+.rank-stats .status .badge {
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* Nút thao tác */
+.rank-actions {
+    text-align: center;
+}
+
+.rank-actions .btn {
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.more-categories {
+    color: #007bff;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.page-item .page-link {
+    margin: 0 3px;
+    color: #007bff;
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .ranking-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    
+    .ranking-tabs .nav-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    
+    .section-title h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .rank-title {
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+    }
+    
+    .rank-meta, .rank-stats {
+        font-size: 0.8rem;
+        gap: 8px;
+    }
+    
+    .rank-meta span, .rank-stats span {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .rank-number {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .ranking-item {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .ranking-tabs .nav-link {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .rank-title {
+        font-size: 1rem;
+    }
+}

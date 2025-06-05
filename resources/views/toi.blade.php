@@ -43,10 +43,10 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body text-center p-4">
                         <div class="avatar-wrapper mb-3">
-                            @if($user->avatar)
-                                <img src="{{ asset(Auth::user()->avatar) }}" alt="{{ $user->name }}" class="rounded-circle img-thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
+                           @if(Auth::user()->avatar)
+                                <img src="{{ asset('assets/img/avatars/' . Auth::user()->avatar) }}" alt="User Avatar" class="user-avatar" style="width: 140px; height: 140px; object-fit: cover;">
                             @else
-                                <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $user->name }}" class="rounded-circle img-thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
+                                <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="user-avatar">
                             @endif
                         </div>
                         
@@ -56,9 +56,6 @@
                         <div class="d-grid gap-2">
                             <a href="{{ route('profile.edit') }}" class="btn btn-primary">
                                 <i class="fas fa-edit me-1"></i> Chỉnh sửa hồ sơ
-                            </a>
-                            <a href="{{ route('profile.password.form') }}" class="btn btn-outline-secondary">
-                                <i class="fas fa-lock me-1"></i> Đổi mật khẩu
                             </a>
                         </div>
                     </div>

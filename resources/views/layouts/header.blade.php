@@ -45,7 +45,7 @@
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     @if(Auth::user()->avatar)
-                                        <img src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" class="user-avatar">
+                                        <img src="{{ asset('assets/img/avatars/' . Auth::user()->avatar) }}" alt="User Avatar" class="user-avatar">
                                     @else
                                         <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="user-avatar">
                                     @endif
@@ -64,9 +64,9 @@
                                     <li class="dropdown-header">
                                         <div class="d-flex align-items-center">
                                             @if(Auth::user()->avatar)
-                                                <img src="{{ asset(Auth::user()->avatar) }}" alt="User Avatar" class="user-avatar-sm me-2">
+                                                <img src="{{ asset('assets/img/avatars/' . Auth::user()->avatar) }}" alt="User Avatar" class="user-avatar">
                                             @else
-                                                <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="user-avatar-sm me-2">
+                                                <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="user-avatar">
                                             @endif
                                             <div>
                                                 <div>{{ Auth::user()->name }}</div>
@@ -154,16 +154,16 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-chart-line me-1"></i>Bảng xếp hạng</a>
+                            <a class="nav-link {{ request()->is('bang-xep-hang*') ? 'active' : '' }}" href="{{ route('bang-xep-hang') }}"><i class="fas fa-chart-line me-1"></i>Bảng xếp hạng</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-fire me-1"></i>Truyện Hot</a>
+                            <a class="nav-link {{ request()->is('truyen-hot*') ? 'active' : '' }}" href="{{ route('truyen-hot') }}"><i class="fas fa-fire me-1"></i>Truyện Hot</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-calendar-alt me-1"></i>Mới cập nhật</a>
+                            <a class="nav-link {{ request()->is('moi-cap-nhat*') ? 'active' : '' }}" href="{{ route('moi-cap-nhat') }}"><i class="fas fa-calendar-alt me-1"></i>Mới cập nhật</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-book-open me-1"></i>Đã hoàn thành</a>
+                            <a class="nav-link {{ request()->is('da-hoan-thanh*') ? 'active' : '' }}" href="{{ route('da-hoan-thanh') }}"><i class="fas fa-book-open me-1"></i>Đã hoàn thành</a>
                         </li>
                     </ul>
                 </div>

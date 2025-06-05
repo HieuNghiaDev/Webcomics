@@ -152,7 +152,7 @@
                                 <div class="comment-item" id="comment-{{ $comment->id }}">
                                     <div class="comment-header d-flex align-items-center">
                                         @if($comment->user->avatar)
-                                            <img src="{{ asset($comment->user->avatar) }}" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
+                                            <img src="{{ asset('assets/img/avatars/' . $comment->user->avatar) }}" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
                                         @else
                                             <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
                                         @endif
@@ -197,7 +197,7 @@
                                                 <div class="reply-item mb-2" id="reply-{{ $reply->id }}">
                                                     <div class="reply-header d-flex align-items-center">
                                                         @if($reply->user->avatar)
-                                                            <img src="{{ asset($reply->user->avatar) }}" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
+                                                            <img src="{{ asset('assets/img/avatars/' . $reply->user->avatar) }}" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
                                                         @else
                                                             <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
                                                         @endif

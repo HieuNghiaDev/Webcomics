@@ -1,0 +1,322 @@
+/* =========================================
+   MANGA LISTING STYLES - Dùng chung cho các trang danh sách truyện
+   ========================================= */
+
+/* Tiêu đề section */
+.section-title {
+    margin-bottom: 25px;
+    border-left: 4px solid #007bff;
+    padding-left: 15px;
+    position: relative;
+}
+
+.section-title h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+}
+
+.section-title p {
+    color: #777;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Icon màu sắc theo từng trang */
+.section-title .text-danger {
+    color: #dc3545 !important;
+}
+
+.section-title .text-primary {
+    color: #007bff !important;
+}
+
+.section-title .text-success {
+    color: #28a745 !important;
+}
+
+.section-title .text-warning {
+    color: #ffc107 !important;
+}
+
+/* Grid manga */
+.row {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.col-lg-2, .col-md-3, .col-sm-4, .col-6 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+/* Card manga */
+.manga-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.manga-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Ảnh bìa */
+.manga-card-image {
+    position: relative;
+    padding-top: 140%;
+    display: block;
+    overflow: hidden;
+}
+
+.manga-card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.manga-card:hover .manga-card-image img {
+    transform: scale(1.05);
+}
+
+/* Thông tin thống kê trên ảnh */
+.manga-card-stats {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    padding: 30px 10px 8px;
+    color: #fff;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.manga-card-stats span {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.manga-card-stats .views i,
+.manga-card-stats .update-time i,
+.manga-card-stats .completed i {
+    margin-right: 3px;
+}
+
+.manga-card-stats .views {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 3px 8px;
+    border-radius: 20px;
+}
+
+.manga-card-stats .update-time {
+    background-color: rgba(0, 123, 255, 0.7);
+    padding: 3px 8px;
+    border-radius: 20px;
+}
+
+.manga-card-stats .completed {
+    background-color: rgba(40, 167, 69, 0.7);
+    padding: 3px 8px;
+    border-radius: 20px;
+}
+
+/* Thông tin truyện */
+.manga-card-info {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.manga-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 2.6rem;
+}
+
+.manga-card-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.manga-card-title a:hover {
+    color: #007bff;
+}
+
+.manga-card-meta {
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: #666;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.manga-card-meta .badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+}
+
+.manga-card-meta .chapters-count {
+    color: #6c757d;
+    margin-left: 5px;
+}
+
+/* Badges */
+.badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-primary {
+    background-color: #007bff !important;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.page-item .page-link {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    margin: 0 3px;
+    border-radius: 4px;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #fff;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.page-link:hover {
+    color: #0056b3;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+/* Overlay status specific per category */
+/* Hot Manga */
+.hot-manga .manga-card-image::before {
+    content: "HOT";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+/* Completed Manga */
+.completed-manga .manga-card-image::before {
+    content: "FULL";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+/* New Updated Manga */
+.updated-manga .manga-card-image::before {
+    content: "NEW";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .section-title h2 {
+        font-size: 1.6rem;
+    }
+    
+    .col-lg-2 {
+        width: 25%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .section-title h2 {
+        font-size: 1.4rem;
+    }
+    
+    .col-md-3 {
+        width: 33.333%;
+    }
+    
+    .manga-card-title {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .section-title h2 {
+        font-size: 1.3rem;
+    }
+    
+    .manga-card-title {
+        font-size: 0.8rem;
+    }
+    
+    .manga-card-meta {
+        font-size: 0.7rem;
+    }
+}

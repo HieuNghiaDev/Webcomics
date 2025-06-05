@@ -125,3 +125,15 @@ Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::put('/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
     Route::post('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
 });
+
+// Thêm route cho trang bảng xếp hạng
+Route::get('/bang-xep-hang', [App\Http\Controllers\HomeController::class, 'BXHshow'])->name('bang-xep-hang');
+
+// Route cho Truyện Hot
+Route::get('/truyen-hot', [App\Http\Controllers\HomeController::class, 'truyenHot'])->name('truyen-hot');
+
+// Route cho Mới cập nhật
+Route::get('/moi-cap-nhat', [App\Http\Controllers\HomeController::class, 'moiCapNhat'])->name('moi-cap-nhat');
+
+// Route cho Đã hoàn thành
+Route::get('/da-hoan-thanh', [App\Http\Controllers\HomeController::class, 'daHoanThanh'])->name('da-hoan-thanh');

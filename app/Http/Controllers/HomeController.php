@@ -45,4 +45,47 @@ class HomeController extends Controller
         
         return view('index', compact('bannerTruyen', 'truyenDeXuat', 'theLoai', 'truyenMoi', 'truyenHot'));
     }
+
+     public function BXHshow(Request $request)
+    {
+        // Lấy danh sách truyện xếp theo lượt xem cao nhất
+        $truyenTopView = Truyen::with(['theLoai'])
+            ->leftJoin('thong_ke_truyen', 'truyen.id', '=', 'thong_ke_truyen.id_truyen')
+            ->orderBy('thong_ke_truyen.luot_xem', 'desc')
+            ->select('truyen.*', 'thong_ke_truyen.luot_xem')
+            ->paginate(15)
+            ->withQueryString();
+        
+        return view('BXH', compact('truyenTopView'));
+    }
+
+    public function truyenHot()
+    {
+        $truyenHot = Truyen::with(['theLoai'])
+            ->leftJoin('thong_ke_truyen', 'truyen.id', '=', 'thong_ke_truyen.id_truyen')
+            ->orderBy('thong_ke_truyen.luot_xem', 'desc')
+            ->select('truyen.*', 'thong_ke_truyen.luot_xem')
+            ->paginate(24);
+        
+        return view('truyenHot', compact('truyenHot'));
+    }
+
+    public function moiCapNhat()
+    {
+        $truyenMoi = Truyen::with(['theLoai'])
+            ->orderBy('ngay_update', 'desc')
+            ->paginate(24);
+        
+        return view('moiCapNhat', compact('truyenMoi'));
+    }
+
+    public function daHoanThanh()
+    {
+        $truyenHoanThanh = Truyen::with(['theLoai'])
+            ->where('tinh_trang', 1)
+            ->orderBy('ngay_update', 'desc')
+            ->paginate(24);
+        
+        return view('truyenDaHT', compact('truyenHoanThanh'));
+    }
 }

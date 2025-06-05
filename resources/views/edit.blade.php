@@ -44,10 +44,10 @@
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body text-center p-4">
                             <div class="avatar-wrapper mb-3">
-                                @if($user->avatar)
-                                    <img src="{{ asset(Auth::user()->avatar) }}" alt="{{ $user->name }}" class="rounded-circle img-thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
+                                @if(Auth::user()->avatar)
+                                    <img src="{{ asset('assets/img/avatars/' . Auth::user()->avatar) }}" alt="User Avatar" class="user-avatar" style="width: 140px; height: 140px; object-fit: cover;">
                                 @else
-                                    <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="{{ $user->name }}" class="rounded-circle img-thumbnail" style="width: 140px; height: 140px; object-fit: cover;">
+                                    <img src="https://cdn.vectorstock.com/i/500p/17/16/default-avatar-anime-girl-profile-icon-vector-21171716.jpg" alt="User Avatar" class="user-avatar">
                                 @endif
                             </div>
                             
@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="list-group mb-4 shadow-sm">
+                    <!-- <div class="list-group mb-4 shadow-sm">
                         <a href="#edit-profile" class="list-group-item list-group-item-action active d-flex align-items-center">
                             <i class="fas fa-user-edit me-2"></i> Thông tin cá nhân
                         </a>
@@ -70,7 +70,7 @@
                         <a href="{{ route('profile.password.form') }}" class="list-group-item list-group-item-action d-flex align-items-center">
                             <i class="fas fa-lock me-2"></i> Đổi mật khẩu
                         </a>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <!-- Main content -->
@@ -103,6 +103,27 @@
                                     </div>
                                 </div>
 
+                                <div class="mb-3 row">
+                                    <label for="password" class="col-md-3 col-form-label">Mật khẩu mới</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Nhập mật khẩu mới">
+                                        @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="form-text text-muted">Để trống nếu không muốn thay đổi.</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row">
+                                    <label for="password_confirmation" class="col-md-3 col-form-label">Xác nhận mật khẩu</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu mới">
+                                        @error('password_confirmation')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-9 offset-md-3">
                                         <button type="submit" class="btn btn-primary">
@@ -123,7 +144,7 @@
                             <form action="{{ route('profile.update-avatar') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 
-                                <div class="text-center mb-4">
+                               <div class="text-center mb-4">
                                     <div class="avatar-preview mb-3">
                                         @if($user->avatar)
                                             <img src="{{ asset('storage/'.$user->avatar) }}" alt="Avatar Preview" id="avatarPreview" class="rounded-circle img-thumbnail" style="width: 180px; height: 180px; object-fit: cover;">

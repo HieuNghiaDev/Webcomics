@@ -44,19 +44,34 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         
-        // Validate đầu vào
-        $validated = $request->validate([
+        $rules = [
             'email' => [
                 'required',
                 'email',
                 Rule::unique('users')->ignore($user->id),
             ],
-            'bio' => 'nullable|string|max:500',
-            'phone' => 'nullable|string|max:15',
-        ]);
+        ];
         
-        // Cập nhật thông tin
-        $user->update($validated);
+        if ($request->filled('password')) {
+            $rules['password_confirmation'] = 'required|password_confirmation';
+            $rules['password'] = 'required|string|min:8|confirmed';
+            $rules['password_confirmation'] = 'required';
+        }
+        
+        $validated = $request->validate($rules);
+        
+        // Cập nhật thông tin cơ bản
+        $updateData = [
+            'email' => $validated['email'],
+        ];
+        
+        // Cập nhật mật khẩu nếu được cung cấp
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($validated['password']);
+        }
+        
+        // Thực hiện cập nhật
+        $user->update($updateData);
         
         return redirect()->route('profile')
             ->with('success', 'Thông tin hồ sơ đã được cập nhật thành công!');
@@ -65,25 +80,22 @@ class ProfileController extends Controller
     /**
      * Cập nhật mật khẩu người dùng
      */
-    public function updatePassword(Request $request)
-    {
-        $validated = $request->validate([
-            'current_password' => 'required|current_password',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+    // public function updatePassword(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'password_confirmation' => 'required|current_password',
+    //         'password' => 'required|string|min:8|confirmed',
+    //     ]);
         
-        // Cập nhật mật khẩu
-        Auth::user()->update([
-            'password' => Hash::make($validated['password']),
-        ]);
+    //     // Cập nhật mật khẩu
+    //     Auth::user()->update([
+    //         'password' => Hash::make($validated['password']),
+    //     ]);
         
-        return redirect()->route('profile.password.form')
-            ->with('success', 'Mật khẩu đã được cập nhật thành công!');
-    }
+    //     return redirect()->route('profile.password.form')
+    //         ->with('success', 'Mật khẩu đã được cập nhật thành công!');
+    // }
 
-    /**
-     * Cập nhật avatar người dùng
-     */
     public function updateAvatar(Request $request)
     {
         $validated = $request->validate([
@@ -92,17 +104,22 @@ class ProfileController extends Controller
         
         $user = Auth::user();
         
-        // Xóa avatar cũ nếu có
-        if ($user->avatar && !str_contains($user->avatar, 'default')) {
-            Storage::disk('public')->delete($user->avatar);
+        if ($user->avatar && file_exists(public_path('assets/img/avatars/' . $user->avatar))) {
+            unlink(public_path('assets/img/avatars/' . $user->avatar));
         }
         
-        // Lưu avatar mới
-        $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        if (!file_exists(public_path('assets/img/avatars'))) {
+            mkdir(public_path('assets/img/avatars'), 0777, true);
+        }
         
-        // Cập nhật đường dẫn avatar trong DB
+        $avatarFile = $request->file('avatar');
+        $extension = $avatarFile->getClientOriginalExtension();
+        $fileName = 'avatar_' . time() . '_' . uniqid() . '.' . $extension;
+        
+        $avatarFile->move(public_path('assets/img/avatars'), $fileName);
+        
         $user->update([
-            'avatar' => $avatarPath
+            'avatar' => $fileName
         ]);
         
         return redirect()->route('profile.edit')
