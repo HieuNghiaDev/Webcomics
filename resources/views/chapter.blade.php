@@ -99,7 +99,7 @@
                 @foreach($chapter->anh as $index => $anh)
                     <div class="image-container">
                         <img src="{{ asset('assets/img/chapter/' . $anh->anh_url) }}" alt="Trang {{ $anh->so_trang }}" class="img-fluid">
-                        <div class="page-number-overlay">{{ $index + 1 }}/{{ count($chapter->anh) }}</div>
+                        <!-- <div class="page-number-overlay">{{ $index + 1 }}/{{ count($chapter->anh) }}</div> -->
                     </div>
                 @endforeach
             </div>
@@ -173,7 +173,6 @@
                             @forelse($comments as $comment)
                                 <div class="comment-item" id="comment-{{ $comment->id }}">
                                     <div class="comment-header d-flex align-items-center">
-                                        <!-- SỬA PHẦN NÀY: Sử dụng avatar của người bình luận -->
                                         @if($comment->user->avatar)
                                             <img src="{{ asset($comment->user->avatar) }}" alt="{{ $comment->user->name }}" class="rounded-circle" width="40" height="40">
                                         @else
@@ -215,7 +214,6 @@
                                             @foreach($comment->replies as $reply)
                                                 <div class="reply-item mb-2" id="reply-{{ $reply->id }}">
                                                     <div class="reply-header d-flex align-items-center">
-                                                        <!-- SỬA PHẦN NÀY: Sử dụng avatar của người trả lời -->
                                                         @if($reply->user->avatar)
                                                             <img src="{{ asset($reply->user->avatar) }}" alt="{{ $reply->user->name }}" class="rounded-circle" width="30" height="30">
                                                         @else

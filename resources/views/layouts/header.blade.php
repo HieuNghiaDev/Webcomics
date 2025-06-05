@@ -69,7 +69,7 @@
                                         </div>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-user-circle me-2"></i>Hồ sơ của tôi</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user-circle me-2"></i>Hồ sơ của tôi</a></li>
                                     <li><a class="dropdown-item" href="{{ route('theo-doi.index') }}"><i class="fas fa-bell me-2"></i>Truyện theo dõi</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>Lịch sử đọc</a></li>
                                     <li><hr class="dropdown-divider"></li>

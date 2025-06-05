@@ -56,7 +56,6 @@ class User extends Authenticatable
 
     public function truyenTheoDoi()
     {
-        return $this->belongsToMany(Truyen::class, 'truyen_theo_doi', 'user_id', 'truyen_id')
-                    ->withTimestamps();
+        return $this->belongsToMany(Truyen::class, 'theodoi', 'user_id', 'truyen_id');
     }
 }

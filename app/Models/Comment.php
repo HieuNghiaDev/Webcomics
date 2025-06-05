@@ -52,7 +52,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
     
-    // Lấy các phản hồi cho comment này - chỉ lấy phản hồi trực tiếp
+    // Lấy các phản hồi cho comment này
     public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id', 'id')

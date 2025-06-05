@@ -122,7 +122,12 @@
                                     <a href="{{ route('truyen.show', $truyen->id) }}">
                                         <img src="{{ asset('assets/img/cover_img/' . $truyen->anh_bia) }}" alt="{{ $truyen->ten_truyen }}" class="img-fluid">
                                     </a>
+
+                                     <div class="manga-card-actions">
+                                        <a href="{{ route('truyen.show', $truyen->id) }}" class="btn-read"><i class="fas fa-book-open"></i> Đọc ngay</a>  
+                                    </div>
                                 </div>
+                                
                                 <div class="manga-card-body">
                                     <h5 class="manga-title"><a href="{{ route('truyen.show', $truyen->id) }}">{{ $truyen->ten_truyen }}</a></h5>
                                     <div class="manga-info">
@@ -206,9 +211,6 @@
 
     <!-- Footer -->
     @include('layouts.footer')
-
-    <!-- Back to Top Button -->
-    <a href="#" id="return-to-top" class="return-to-top"><i class="fas fa-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

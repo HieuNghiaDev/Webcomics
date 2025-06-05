@@ -1,0 +1,100 @@
+.bg-primary-light {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+.bg-success-light {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+.bg-info-light {
+    background-color: rgba(13, 202, 240, 0.1);
+}
+.manga-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+.manga-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.manga-card-img {
+    position: relative;
+    overflow: hidden;
+}
+.manga-card-img img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+.manga-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background-color: rgba(220, 53, 69, 0.9);
+    color: white;
+    z-index: 1;
+}
+.manga-status.new {
+    background-color: rgba(25, 135, 84, 0.9);
+}
+.manga-card-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.manga-card:hover .manga-card-actions {
+    opacity: 1;
+}
+.manga-card-body {
+    padding: 12px;
+}
+.manga-title {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.3;
+    height: 2.6rem;
+}
+.manga-title a {
+    color: #212529;
+    text-decoration: none;
+}
+.manga-title a:hover {
+    color: #0d6efd;
+}
+.manga-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+.btn-read {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.btn-read:hover {
+    background-color: #0b5ed7;
+    color: white;
+}

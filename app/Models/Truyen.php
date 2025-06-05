@@ -11,12 +11,20 @@ class Truyen extends Model
 
     protected $table = 'truyen';
 
+    const CREATED_AT = 'ngay_dang';
+    const UPDATED_AT = 'ngay_update';
+
     protected $fillable = [
         'ten_truyen',
         'mo_ta',
         'anh_bia',
+        'tac_gia',
+        'tinh_trang',
         'ngay_update',
+        'ngay_dang',
     ];
+
+    
 
     // Quan hệ với bảng ThongKeTruyen (thống kê lượt xem)
     public function thongKe()

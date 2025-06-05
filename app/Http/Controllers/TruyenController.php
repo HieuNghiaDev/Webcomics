@@ -64,7 +64,7 @@ class TruyenController extends Controller
     public function search(Request $request)
     {
         $request->validate([
-            'keyword' => 'required|min:2|max:100',
+            'keyword' => 'required|min:1|max:100',
         ]);
         
         $keyword = $request->input('keyword');
